@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { StoreProvider } from 'easy-peasy';
+import store from './stores';
 import './App.css';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core';
+import { AppRouter } from './router/AppRouter';
+
+const theme = createMuiTheme({
+  props: {
+    MuiTypography: {
+      variantMapping: {
+        h1: 'h2',
+        h2: 'h2',
+        h3: 'h2',
+        h4: 'h2',
+        h5: 'h2',
+        h6: 'h2',
+        subtitle1: 'h2',
+        subtitle2: 'h2',
+        body1: 'span',
+        body2: 'span',
+      },
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <AppRouter />
+      </ThemeProvider>
+    </StoreProvider>
   );
 }
 

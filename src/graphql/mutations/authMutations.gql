@@ -1,0 +1,9 @@
+mutation logIn($email: String!, $password: String!) {
+  logIn(email: $email, password:  $password) {
+    user {
+      ...UserFragment
+    }
+    token
+    tokenExpire
+  }
+}
