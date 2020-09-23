@@ -4,6 +4,8 @@ import store from './stores';
 import './App.css';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
 import { AppRouter } from './router/AppRouter';
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from './config/ApolloClientConfig';
 
 const theme = createMuiTheme({
   props: {
@@ -25,11 +27,15 @@ const theme = createMuiTheme({
 });
 
 function App() {
+  const [getApolloClient] = useApollo();
+
   return (
     <StoreProvider store={store}>
-      <ThemeProvider theme={theme}>
-        <AppRouter />
-      </ThemeProvider>
+      <ApolloProvider client={getApolloClient()}>
+        <ThemeProvider theme={theme}>
+          <AppRouter />
+        </ThemeProvider>
+      </ApolloProvider>
     </StoreProvider>
   );
 }
